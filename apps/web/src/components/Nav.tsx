@@ -58,8 +58,9 @@ const Nav = () => {
           </Button>
         </div>
         <div className={`py-2 px-2 ${isCollapsed && ''}`}>
-          {mainControls.map((item) => (
+          {mainControls.map((item, index) => (
             <Button
+              key={`main-controls-${index}`}
               variant="ghostText"
               className={`${isCollapsed && 'px-0 justify-center aspect-square'}`}
             >
@@ -91,8 +92,12 @@ const Nav = () => {
               <p className="text-xs px-2 opacity-60 text-nowrap">
                 Conversations récentes
               </p>
-              {conversations.map((item) => (
-                <Button variant="ghostText" className={``}>
+              {conversations.map((item, index) => (
+                <Button
+                  key={`conversations-${index}`}
+                  variant="ghostText"
+                  className={``}
+                >
                   <span className="truncate">{item}</span>
                 </Button>
               ))}
