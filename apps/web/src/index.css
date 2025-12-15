@@ -31,3 +31,7 @@
   --color-darker-dark: var(--darker-dark-color);
   --color-primary: var(--primary-color);
 }
+
+.squircle {
+  corner-shape: squircle;
+}

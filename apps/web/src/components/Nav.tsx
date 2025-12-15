@@ -108,7 +108,7 @@ const Nav = () => {
       <div
         className={`flex shrink-0 items-center justify-between w-[${sideBarWidth.toString()}px] gap-2 h-12 px-2 border-t border-dark/10 dark:border-light/10`}
       >
-        <button className="flex items-center px-1 -ml-1 rounded-sm py-1 gap-2 hover:bg-dark/10 dark:hover:bg-light/10 active:bg-dark/15 dark:active:bg-light/15 duration-100 cursor-pointer text-sm text-nowrap">
+        <button className="flex items-center px-1 -ml-1 rounded-xl squircle py-1 gap-2 hover:bg-dark/10 dark:hover:bg-light/10 active:bg-dark/15 dark:active:bg-light/15 duration-100 cursor-pointer text-sm text-nowrap">
           <div className="flex shrink-0 items-center justify-center rounded-full bg-dark dark:bg-light text-light dark:text-dark font-semibold text-sm h-8 aspect-square select-none">
             {user.firstName.charAt(0)}
             {user.lastName.charAt(0)}
