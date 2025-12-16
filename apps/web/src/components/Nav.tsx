@@ -62,7 +62,7 @@ const Nav = () => {
             <Button
               key={`main-controls-${index}`}
               variant="ghostText"
-              className={`${isCollapsed && 'px-0 justify-center aspect-square'}`}
+              className={`w-full ${isCollapsed && 'px-0 justify-center aspect-square'}`}
             >
               {item.icon}
               <AnimatePresence initial={false}>
@@ -96,7 +96,7 @@ const Nav = () => {
                 <Button
                   key={`conversations-${index}`}
                   variant="ghostText"
-                  className={``}
+                  className="w-full"
                 >
                   <span className="truncate">{item}</span>
                 </Button>
@@ -132,7 +132,7 @@ const Nav = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <Button variant="classicYellow">Dashboard</Button>
+              <Button variant="smallClassicYellow">Dashboard</Button>
             </motion.div>
           )}
         </AnimatePresence>

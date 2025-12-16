@@ -1,7 +1,11 @@
 import type React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'ghostIcon' | 'ghostText' | 'classicYellow';
+  variant:
+    | 'ghostIcon'
+    | 'ghostText'
+    | 'smallClassicYellow'
+    | 'largeClassicYellow';
 }
 
 const Button = ({ variant, className, children, ...props }: ButtonProps) => {
@@ -19,14 +23,26 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
       return (
         <button
           {...props}
-          className={`flex items-center justify-start shrink-0 gap-2 rounded-xl px-2 min-w-8 h-8 text-sm hover:bg-dark/10 dark:hover:bg-light/10 active:bg-dark/15 dark:active:bg-light/15 duration-100 cursor-pointer w-full text-nowrap squircle ${className}`}
+          className={`flex items-center justify-start shrink-0 gap-2 rounded-xl px-2 min-w-8 h-8 text-sm hover:bg-dark/10 dark:hover:bg-light/10 active:bg-dark/15 dark:active:bg-light/15 duration-100 cursor-pointer text-nowrap squircle ${className}`}
         >
           {children}
         </button>
       );
-    case 'classicYellow':
+    case 'smallClassicYellow':
       return (
-        <button className="bg-primary hover:bg-primary/80 active:bg-primary/70 duration-100 text-light text-sm h-8 px-2 rounded-xl cursor-pointer squircle">
+        <button
+          {...props}
+          className={`flex items-center justify-center bg-primary hover:bg-primary/80 active:bg-primary/70 duration-100 text-light text-sm h-8 px-2 rounded-xl cursor-pointer squircle ${className}`}
+        >
+          {children}
+        </button>
+      );
+    case 'largeClassicYellow':
+      return (
+        <button
+          {...props}
+          className={`flex items-center justify-center bg-primary hover:bg-primary/80 active:bg-primary/70 duration-100 text-light text-sm h-12 px-2 rounded-3xl cursor-pointer squircle ${className}`}
+        >
           {children}
         </button>
       );
