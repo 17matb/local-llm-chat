@@ -1,7 +1,7 @@
 import { Flag, PanelLeftClose, PanelLeftOpen, SquarePen } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import Button from './Button';
+import Button from './ui/Button';
 
 const Nav = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -132,7 +132,7 @@ const Nav = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <Button variant="smallClassicYellow">Dashboard</Button>
+              <Button variant="smallClassicPrimary">Dashboard</Button>
             </motion.div>
           )}
         </AnimatePresence>
