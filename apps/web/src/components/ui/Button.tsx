@@ -4,8 +4,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant:
     | 'ghostIcon'
     | 'ghostText'
-    | 'smallClassicYellow'
-    | 'largeClassicYellow';
+    | 'smallClassicPrimary'
+    | 'largeClassicPrimary'
+    | 'largeClassicPrimaryIcon';
 }
 
 const Button = ({ variant, className, children, ...props }: ButtonProps) => {
@@ -28,7 +29,7 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
           {children}
         </button>
       );
-    case 'smallClassicYellow':
+    case 'smallClassicPrimary':
       return (
         <button
           {...props}
@@ -37,11 +38,20 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
           {children}
         </button>
       );
-    case 'largeClassicYellow':
+    case 'largeClassicPrimary':
       return (
         <button
           {...props}
-          className={`flex items-center justify-center bg-primary hover:bg-primary/80 active:bg-primary/70 duration-100 text-light text-sm h-12 px-2 rounded-3xl cursor-pointer squircle ${className}`}
+          className={`flex items-center justify-center bg-primary hover:bg-primary/80 active:bg-primary/70 duration-100 text-light h-12 px-4 rounded-3xl cursor-pointer squircle ${className}`}
+        >
+          {children}
+        </button>
+      );
+    case 'largeClassicPrimaryIcon':
+      return (
+        <button
+          {...props}
+          className={`flex items-center justify-center bg-primary hover:bg-primary/80 active:bg-primary/70 duration-100 text-light h-12 rounded-3xl cursor-pointer squircle ${className}`}
         >
           {children}
         </button>
