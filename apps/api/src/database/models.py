@@ -44,7 +44,6 @@ class Conversation(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     title = Column(String, default="Nouvelle conversation")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    edited_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", back_populates="conversations")
     messages = relationship(
