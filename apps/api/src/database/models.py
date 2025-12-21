@@ -14,6 +14,11 @@ class MessageRole(enum.Enum):
     system = "system"
 
 
+class UserRole(enum.Enum):
+    user = "user"
+    admin = "admin"
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -22,6 +27,7 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
+    role = Column(Enum(UserRole), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     conversations = relationship(
