@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from src.database import schemas
@@ -11,15 +11,17 @@ from src.utils.auth_utils import (
     hash_password,
 )
 
-users_router = APIRouter(prefix="/users")
+users_router = APIRouter(prefix="/users", tags=["users"])
 
 
 @users_router.post("/", response_model=schemas.UserRead)
 def register_user(user_data: schemas.UserCreate, db: Session = Depends(get_db)):
+    """Créer un nouvel utilisateur"""
     existing_user = db.query(User).filter(User.username == user_data.username).first()
     if existing_user:
         raise HTTPException(
-            status_code=400, detail="Ce nom d'utilisateur est déjà pris"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Ce nom d'utilisateur est déjà pris",
         )
     new_user = User(
         username=user_data.username,
@@ -38,4 +40,5 @@ def register_user(user_data: schemas.UserCreate, db: Session = Depends(get_db)):
 def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)],
 ):
+    """Récupérer les informations de son propre profil"""
     return current_user

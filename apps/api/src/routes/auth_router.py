@@ -9,7 +9,7 @@ from src.database.database import get_db
 from src.database.schemas import Token
 from src.utils.auth_utils import authenticate_user, create_access_token
 
-auth_router = APIRouter(prefix="/auth")
+auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @auth_router.post("/token")
@@ -17,6 +17,7 @@ def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db),
 ) -> Token:
+    """S'authentifier et conserver un token JWT"""
     user = authenticate_user(form_data.username, form_data.password, db)
     if not user:
         raise HTTPException(
