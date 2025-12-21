@@ -1,6 +1,16 @@
-def main():
-    print("Hello from api!")
+from fastapi import FastAPI
+
+from src.database.database import Base, engine
+from src.routes.auth_router import auth_router
+from src.routes.users_router import users_router
+
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI()
+app.include_router(users_router)
+app.include_router(auth_router)
 
 
-if __name__ == "__main__":
-    main()
+@app.get("/")
+def read_root():
+    return {"message": "API is fine"}
