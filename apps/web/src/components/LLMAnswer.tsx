@@ -1,9 +1,11 @@
+import type { ReactNode } from 'react';
+
 type Props = {
-  content: string;
+  children: ReactNode;
 };
 
-const LLMAnswer = ({ content }: Props) => {
-  return <div className="mb-8">{content}</div>;
+const LLMAnswer = ({ children }: Props) => {
+  return <div className="mb-8">{children}</div>;
 };
 
 export default LLMAnswer;
