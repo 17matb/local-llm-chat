@@ -39,8 +39,8 @@ const ChatInput = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2 w-full max-w-[800px] px-4 mx-auto mb-2 flex-none">
-      <div className="flex gap-2 w-full">
+    <div className="flex flex-col items-center w-full max-w-[800px] px-4 mx-auto mb-2 flex-none">
+      <div className="flex gap-2 w-full mb-2">
         <div className="flex flex-col flex-1 justify-center bg-dark/5 dark:bg-light/5 rounded-3xl squircle min-h-12 px-4 py-2 border border-dark/10 dark:border-light/10 focus-within:border-dark/30 focus-within:dark:border-light/30 duration-100">
           {!content && (
             <div className="h-6 flex items-center absolute pointer-events-none opacity-50">

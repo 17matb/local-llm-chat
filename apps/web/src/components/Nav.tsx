@@ -5,7 +5,11 @@ import Button from './ui/Button';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  mainControls: Array<{ label: string; icon: LucideIcon; path: string }>;
+  mainControls: Array<{
+    label: string;
+    icon: LucideIcon;
+    path?: string;
+  }>;
   conversations?: Array<string>;
   adminButton: { label: string; path: string };
 };
@@ -14,14 +18,13 @@ const Nav = ({ mainControls, conversations, adminButton }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const sideBarWidth = 260;
-  const user = {
-    firstName: 'John',
-    lastName: 'Doe',
-  };
+
+  const user = { first_name: 'john', last_name: 'doe' };
 
   return (
     <nav
-      className={`${isCollapsed ? 'w-12' : `w-[${sideBarWidth.toString()}px]`} duration-200 ease-in-out shrink-0 border-r border-dark/10 dark:border-light/10 bg-darker-light dark:bg-darker-dark flex flex-col overflow-hidden`}
+      style={{ width: isCollapsed ? '3rem' : `${sideBarWidth}px` }}
+      className="duration-200 ease-in-out shrink-0 border-r border-dark/10 dark:border-light/10 bg-darker-light dark:bg-darker-dark flex flex-col overflow-hidden"
     >
       <div className="border-b border-dark/10 dark:border-light/10">
         <div className="flex shrink-0 justify-between items-center border-bx border-dark/10 dark:border-light/10 h-12 px-2 relative">
@@ -105,9 +108,9 @@ const Nav = ({ mainControls, conversations, adminButton }: Props) => {
         className={`flex shrink-0 items-center justify-between w-[${sideBarWidth.toString()}px] gap-2 h-12 px-2 border-t border-dark/10 dark:border-light/10`}
       >
         <button className="flex items-center px-1 -ml-1 rounded-xl squircle py-1 gap-2 hover:bg-dark/10 dark:hover:bg-light/10 active:bg-dark/15 dark:active:bg-light/15 duration-100 cursor-pointer text-sm text-nowrap">
-          <div className="flex shrink-0 items-center justify-center rounded-full bg-dark dark:bg-light text-light dark:text-dark font-semibold text-sm h-8 aspect-square select-none">
-            {user.firstName.charAt(0)}
-            {user.lastName.charAt(0)}
+          <div className="flex shrink-0 uppercase items-center justify-center rounded-full bg-dark dark:bg-light text-light dark:text-dark font-semibold text-sm h-8 aspect-square select-none">
+            {user!.first_name.charAt(0)}
+            {user!.last_name.charAt(0)}
           </div>
           <AnimatePresence initial={false}>
             {!isCollapsed && (
@@ -116,7 +119,8 @@ const Nav = ({ mainControls, conversations, adminButton }: Props) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                {user.firstName} {user.lastName}
+                <span className="capitalize">{user!.first_name}</span>{' '}
+                <span className="capitalize">{user!.last_name}</span>
               </motion.p>
             )}
           </AnimatePresence>
