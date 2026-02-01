@@ -1,37 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import 'tailwindcss';
 
-:root {
-  --light-color: #fbf1c7;
-  --darker-light-color: #eddbb2;
-  --dark-color: #3c3836;
-  --darker-dark-color: #282828;
-  --primary-color: #d79921;
+@theme {
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-overlay: var(--bg-overlay);
+  --color-fg-text: var(--fg-text);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-fg-on-accent: var(--fg-on-accent);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
+}
 
+:root,
+[data-theme='rose-pine'] {
+  --bg-base: #faf4ed;
+  --bg-surface: #fffaf3;
+  --bg-overlay: #f2e9e1;
+  --fg-text: #575279;
+  --fg-subtle: #797593;
+  --fg-on-accent: #faf4ed;
+  --accent: #286983;
+  --destructive: #b4637a;
+}
+
+[data-theme='gruvbox'] {
+  --bg-base: #fbf1c7;
+  --bg-surface: #eddbb2;
+  --bg-overlay: #d5c4a1;
+  --fg-text: #3c3836;
+  --fg-subtle: #665c54;
+  --fg-on-accent: #fbf1c7;
+  --accent: #d79921;
+  --destructive: #cc241d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  [data-theme='rose-pine'] {
+    --bg-base: #191724;
+    --bg-surface: #1f1d2e;
+    --bg-overlay: #26233a;
+    --fg-text: #e0def4;
+    --fg-subtle: #908caa;
+    --fg-on-accent: #e0def4;
+    --accent: #31748f;
+    --destructive: #eb6f92;
+  }
+
+  [data-theme='gruvbox'] {
+    --bg-base: #282828;
+    --bg-surface: #3c3836;
+    --bg-overlay: #504945;
+    --fg-text: #ebdbb2;
+    --fg-subtle: #d5c4a1;
+    --fg-on-accent: #ebdbb2;
+    --accent: #d79921;
+    --destructive: #cc241d;
+  }
+}
+
+body {
   font-family: 'Inter', Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: var(--dark-color);
-  background-color: var(--light-color);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: var(--light-color);
-    background-color: var(--dark-color);
-  }
-}
-
-@theme {
-  --color-light: var(--light-color);
-  --color-darker-light: var(--darker-light-color);
-  --color-dark: var(--dark-color);
-  --color-darker-dark: var(--darker-dark-color);
-  --color-primary: var(--primary-color);
+  color: var(--fg-text);
+  background-color: var(--bg-base);
 }
 
 .squircle {
   corner-shape: squircle;
+}
+
+.root {
+  isolation: isolate;
 }
