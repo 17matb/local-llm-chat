@@ -70,8 +70,24 @@ body {
   background-color: var(--bg-base);
 }
 
-.squircle {
-  corner-shape: squircle;
+.squircle-sm {
+  @apply rounded-lg;
+}
+
+.squircle-md {
+  @apply rounded-xl;
+}
+
+@supports (corner-shape: squircle) {
+  .squircle-sm {
+    corner-shape: squircle;
+    @apply rounded-xl;
+  }
+
+  .squircle-md {
+    corner-shape: squircle;
+    @apply rounded-3xl;
+  }
 }
 
 .root {
