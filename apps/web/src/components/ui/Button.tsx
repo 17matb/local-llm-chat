@@ -1,51 +1,39 @@
-import type React from 'react';
+import { cn } from '@/utils/cn';
+import { Button as ButtonPrimitive } from '@base-ui/react';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant:
-    | 'ghostIcon'
-    | 'ghostText'
-    | 'smallClassicAccent'
-    | 'largeClassicAccent'
-    | 'largeClassicAccentIcon';
-}
+const buttonVariants = cva(
+  'flex items-center justify-center shrink-0 gap-2 duration-100 cursor-pointer px-2',
+  {
+    variants: {
+      variant: {
+        default:
+          'bg-accent hover:bg-accent/80 active:bg-accent/70 text-fg-on-accent',
+        ghost: 'hover:bg-bg-overlay active:bg-bg-overlay/70',
+        destructive:
+          'bg-destructive hover:bg-destructive/80 active:bg-destructive/70 text-fg-on-accent',
+      },
+      size: {
+        default: 'h-10 px-5 squircle-md',
+        sm: 'text-sm h-8 squircle-sm',
+        icon: 'size-12 squircle-md',
+        'icon-sm': 'text-sm size-8 squircle-sm',
+      },
+    },
+  },
+);
 
-const Button = ({ variant, className, children, ...props }: ButtonProps) => {
-  const commonStyles =
-    'flex items-center shrink-0 gap-2 duration-100 cursor-pointer squircle';
-
-  let variantStyles = '';
-
-  switch (variant) {
-    case 'ghostIcon':
-      variantStyles =
-        'justify-center hover:bg-bg-overlay rounded-xl h-8 aspect-square overflow-hidden text-sm active:bg-bg-overlay/70';
-      break;
-    case 'ghostText':
-      variantStyles =
-        'justify-start hover:bg-bg-overlay rounded-xl px-2 min-w-8 h-8 text-sm active:bg-bg-overlay/70 text-nowrap';
-      break;
-    case 'smallClassicAccent':
-      variantStyles =
-        'justify-center bg-accent hover:bg-accent/80 active:bg-accent/70 text-fg-on-accent text-sm h-8 px-2 rounded-xl';
-      break;
-    case 'largeClassicAccent':
-      variantStyles =
-        'justify-center bg-accent hover:bg-accent/80 active:bg-accent/70 text-fg-on-accent h-12 px-4 rounded-3xl';
-      break;
-    case 'largeClassicAccentIcon':
-      variantStyles =
-        'justify-center bg-accent hover:bg-accent/80 active:bg-accent/70 text-fg-on-accent h-12 aspect-square rounded-3xl';
-      break;
-  }
-
+export const Button = ({
+  className,
+  variant = 'default',
+  size = 'default',
+  ...props
+}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) => {
   return (
-    <button
+    <ButtonPrimitive
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-      className={`${commonStyles} ${variantStyles} ${className}`}
-    >
-      {children}
-    </button>
+    />
   );
 };
-
-export default Button;
