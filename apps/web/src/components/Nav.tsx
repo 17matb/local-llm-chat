@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import Button from './ui/Button';
+import { Button } from './ui/Button';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -35,10 +35,10 @@ const Nav = ({ mainControls, conversations }: Props) => {
         width: isCollapsed ? '3rem' : `${sideBarWidth}px`,
         transitionDuration: collapseDuration + 'ms',
       }}
-      className="ease-in-out shrink-0 border-r border-dark/10 dark:border-light/10 bg-darker-light dark:bg-darker-dark flex flex-col overflow-hidden"
+      className="ease-in-out shrink-0 border-r border-fg-subtle/10 bg-bg-surface flex flex-col overflow-hidden"
     >
-      <div className="border-b border-dark/10 dark:border-light/10">
-        <div className="flex shrink-0 justify-between items-center border-bx border-dark/10 dark:border-light/10 h-12 px-2 relative">
+      <div className="border-b border-fg-subtle/10">
+        <div className="flex shrink-0 justify-between items-center border-b border-fg-subtle/10 h-12 px-2 relative">
           <AnimatePresence initial={false}>
             {!isCollapsed && (
               <Link to={{ pathname: '/' }}>
@@ -55,7 +55,8 @@ const Nav = ({ mainControls, conversations }: Props) => {
             )}
           </AnimatePresence>
           <Button
-            variant="ghostIcon"
+            variant="ghost"
+            size="icon-sm"
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="absolute right-2"
           >
@@ -66,17 +67,18 @@ const Nav = ({ mainControls, conversations }: Props) => {
             )}
           </Button>
         </div>
-        <div className={`py-2 px-2 ${isCollapsed && ''}`}>
+        <div className={`py-2 px-2`}>
           {mainControls.map((item, index) => (
             <Link key={`main-controls-${index}`} to={{ pathname: item.path }}>
               <Button
-                variant="ghostText"
-                className={`w-full ${isCollapsed && 'px-0 justify-center aspect-square'}`}
+                variant="ghost"
+                size={isCollapsed ? 'icon-sm' : 'sm'}
+                className={`w-full justify-start`}
               >
                 <item.icon size={16} className="shrink-0" />
                 <AnimatePresence initial={false}>
                   {!isCollapsed && (
-                    <motion.p
+                    <motion.span
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -84,7 +86,7 @@ const Nav = ({ mainControls, conversations }: Props) => {
                       className="text-nowrap"
                     >
                       {item.label}
-                    </motion.p>
+                    </motion.span>
                   )}
                 </AnimatePresence>
               </Button>
@@ -92,7 +94,7 @@ const Nav = ({ mainControls, conversations }: Props) => {
           ))}
         </div>
       </div>
-      <div className="overflow-y-scroll h-full px-2 py-2">
+      <div className="overflow-y-auto overflow-x-hidden h-full px-2 py-2">
         <AnimatePresence initial={false}>
           {!isCollapsed && conversations && (
             <motion.div
@@ -107,7 +109,8 @@ const Nav = ({ mainControls, conversations }: Props) => {
               {conversations.map((item, index) => (
                 <Button
                   key={`conversations-${index}`}
-                  variant="ghostText"
+                  variant="ghost"
+                  size="sm"
                   className="w-full"
                 >
                   <span className="truncate">{item}</span>
@@ -118,10 +121,15 @@ const Nav = ({ mainControls, conversations }: Props) => {
         </AnimatePresence>
       </div>
       <div
-        className={`flex shrink-0 w-full items-center justify-between gap-1 h-12 px-2 border-t border-dark/10 dark:border-light/10 overflow-x-hidden`}
+        className={`flex shrink-0 w-full items-center justify-between gap-1 h-12 px-2 border-t border-fg-subtle/10 overflow-x-hidden`}
       >
-        <button className="flex w-full items-center px-1 rounded-xl squircle py-1 gap-2 hover:bg-dark/10 dark:hover:bg-light/10 active:bg-dark/15 dark:active:bg-light/15 duration-100 cursor-pointer text-sm">
-          <div className="flex shrink-0 uppercase items-center justify-center rounded-full bg-dark dark:bg-light text-light dark:text-dark font-semibold text-xs h-6 aspect-square select-none">
+        <Button
+          variant="ghost"
+          size={isCollapsed ? 'icon-sm' : 'sm'}
+          className="w-full justify-start"
+          style={{ paddingLeft: 4, paddingRight: 4 }}
+        >
+          <div className="flex shrink-0 uppercase items-center justify-center rounded-full bg-accent text-fg-on-accent font-semibold text-xs h-6 aspect-square select-none">
             {user!.first_name.charAt(0)}
             {user!.last_name.charAt(0)}
           </div>
@@ -142,7 +150,7 @@ const Nav = ({ mainControls, conversations }: Props) => {
               </motion.div>
             )}
           </AnimatePresence>
-        </button>
+        </Button>
       </div>
     </nav>
   );
