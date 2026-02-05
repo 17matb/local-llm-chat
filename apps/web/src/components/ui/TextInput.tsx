@@ -20,10 +20,13 @@ const TextInput = ({
       <input
         {...props}
         type={type === 'password' ? 'password' : 'text'}
-        className={`border border-dark/10 bg-dark/10 dark:border-light/10 dark:bg-light/10 w-full h-12 px-4 squircle rounded-3xl focus:outline-0 focus:border-dark/30 dark:focus:border-light/30 ${className}`}
+        className={`border border-fg-subtle/10 bg-bg-surface dark:border-light/10 dark:bg-light/10 w-full h-12 px-4 squircle-md focus:outline-0 focus:border-dark/30 dark:focus:border-light/30 ${className}`}
       />
       {RightIcon && (
-        <button className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+        <button
+          onClick={() => onRightIconClick}
+          className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+        >
           <RightIcon size={18} />
         </button>
       )}
